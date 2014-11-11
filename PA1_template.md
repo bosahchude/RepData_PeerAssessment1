@@ -1,6 +1,6 @@
-# Reproducible Research: Peer Assessment 1
+# Analysis of daily human personal activity
 Bosah Chude  
-Friday, October 17, 2014  
+Teusday, November 11, 2014  
 
 
 ## Loading and preprocessing the data
@@ -38,7 +38,7 @@ Histogram of the total number of steps taken each day, Plotted using `ggplot2` l
 ```r
 #Get the daily sum
 sumActivityData <- tapply(activityData$steps, activityData$date, sum, na.rm = TRUE)
-qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_bar(stat="identity") +
+qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram(stat="identity") +
      labs(x = "", y = "Number of Steps", title = "Total Number of Steps Taken Each Day")
 ```
 
@@ -80,7 +80,7 @@ ggplot(data = meanDF, aes(x = interval, y = steps)) + geom_line() +
      labs(x = "Intervals", y = "Steps", title = "Average Daily Activity Pattern")
 ```
 
-<img src="./PA1_template_files/figure-html/unnamed-chunk-5-1.png" title="" alt="" style="display: block; margin: auto;" />
+<img src="./PA1_template_files/figure-html/unnamed-chunk-5-1.png" title="" alt=""  />
 
 Using the `which.max` function, we can easily determine the be `206.1698`. It occurred at the `835` interval
 
@@ -135,7 +135,7 @@ Histogram of all the steps in the new data frame.
 ```r
 #Get the daily sum
 sumActivityData <- tapply(missingActivityData$steps, missingActivityData$date, sum, na.rm = TRUE)
-qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_bar(stat="identity") +
+qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram(stat="identity") +
      labs(x = "", y = "Number of Steps", title = "Total Number of Steps Taken Each Day (No Missing Values)")
 ```
 

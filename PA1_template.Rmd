@@ -1,7 +1,7 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: "Analysis of daily human personal activity"
 author: "Bosah Chude"
-date: "Friday, October 17, 2014"
+date: "Teusday, November 11, 2014"
 output: 
   html_document:
     keep_md: true
@@ -33,7 +33,7 @@ Histogram of the total number of steps taken each day, Plotted using `ggplot2` l
 ```{r, fig.width=9, fig.align='center'}
 #Get the daily sum
 sumActivityData <- tapply(activityData$steps, activityData$date, sum, na.rm = TRUE)
-qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_bar(stat="identity") +
+qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram(stat="identity") +
      labs(x = "", y = "Number of Steps", title = "Total Number of Steps Taken Each Day")
 ```
 
@@ -49,7 +49,7 @@ median(activityData$steps, na.rm = TRUE)
 Using `tapply`, the mean for each interval with the missing values removed is computed.
 
 The result is saved in a new data frame `meanDF`. This new data frame is plotted below as a time series.
-```{r, fig.width=9, fig.align='center'}
+```{r, fig.width=9, fig.align='cente.r'}
 meanActivityData <- tapply(activityData$steps, activityData$interval, mean, na.rm = TRUE)
 meanDF <- as.data.frame.array(meanActivityData)
 colnames(meanDF) <- "steps"
@@ -93,7 +93,7 @@ Histogram of all the steps in the new data frame.
 ```{r, fig.width=9, fig.align='center'}
 #Get the daily sum
 sumActivityData <- tapply(missingActivityData$steps, missingActivityData$date, sum, na.rm = TRUE)
-qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_bar(stat="identity") +
+qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram(stat="identity") +
      labs(x = "", y = "Number of Steps", title = "Total Number of Steps Taken Each Day (No Missing Values)")
 ```
 
