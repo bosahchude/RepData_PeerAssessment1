@@ -1,7 +1,7 @@
 ---
 title: "Analysis of daily human personal activity"
 author: "Bosah Chude"
-date: "Teusday, November 11, 2014"
+date: "`r format(Sys.Date(), format='%B %d, %Y.')`"
 output: 
   html_document:
     keep_md: true
@@ -28,7 +28,7 @@ activityData$date <- ymd(activityData$date)
 head(activityData, 3)
 ```
 
-## What is mean total number of steps taken per day?
+## What is the mean total number of steps taken per day?
 Histogram of the total number of steps taken each day, Plotted using `ggplot2` library
 ```{r, fig.width=9, fig.align='center'}
 #Get the daily sum
@@ -40,9 +40,9 @@ qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram
 Calculating the median and median
 ```{r}
 #mean
-mean(activityData$steps, na.rm = TRUE)
+mean(sumActivityData)
 #median
-median(activityData$steps, na.rm = TRUE)
+median(sumActivityData)
 ```
 
 ## What is the average daily activity pattern?
@@ -60,7 +60,7 @@ ggplot(data = meanDF, aes(x = interval, y = steps)) + geom_line() +
      labs(x = "Intervals", y = "Steps", title = "Average Daily Activity Pattern")
 ```
 
-Using the `which.max` function, we can easily determine the be `206.1698`. It occurred at the `835` interval
+Using the `which.max` function, we can easily determine the maximum number of steps accorss all five minute intervals to be `206.1698`. It occurred at the `835` interval.
 ```{r}
 #Get Maximun Row
 meanActivityData[which.max(meanActivityData)]
@@ -100,13 +100,13 @@ qplot(x = ymd(row.names(sumActivityData)), y = sumActivityData) + geom_histogram
 Calculating the mean and median of the new data frame.
 ```{r}
 #Mean
-mean(missingActivityData$steps)
+mean(sumActivityData)
 #Median
-median(missingActivityData$steps)
+median(sumActivityData)
 ```
-These values do not differ from when there where missing values in the data.
+These values differs by little amounts from when there where missing values in the data.
 
-Imputing missing data has not affected the mean or median. This is because the replacement for the missing values were determined via a measure of central tendency (i.e. the mean).
+Imputing missing data has not has only affected the mean and median marginally. This is because the replacement for the missing values were determined via a measure of central tendency (i.e. the mean).
 
 ## Are there differences in activity patterns between weekdays and weekends?
 A new column `week` is added to the data frame to signify which day of the week each specific row falls on.
